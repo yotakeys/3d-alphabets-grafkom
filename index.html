@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>Belajar WebGL</title>
+</head>
+<body onload="main()">
+    <canvas id="myCanvas">
+
+    </canvas>
+    <script type="text/javascript" src="static/data/data.js"></script>
+    <script type="text/javascript" src="static/js/helper.js"></script>
+    <script type="text/javascript" src="static/js/main.js"></script>
+    <script type="text/javascript" src="static/js/IOHandler.js"></script>
+
+    <script id="fragmentShaderCode" type="notjs">
+        precision mediump float;
+        varying vec3 vColor;
+        void main(){
+            gl_FragColor = vec4(vColor, 1.0);
+        }
+    </script>
+
+</body>
+</html>
