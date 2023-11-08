@@ -64,26 +64,46 @@ function main(){
     var Mmatrix = gl.getUniformLocation(program, "uModel");
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     
-    var projmatrix = getprojection(45, canvas.width/canvas.height, 1, 100);
-    var modmatrix = [
-        1,0,0,0,
-        0,1,0,0,
-        0,0,1,0,
-        0,0,0,1];
-    var viewmatrix = [
-        1,0,0,0,
-        0,1,0,0,
-        0,0,1,0,
-        0,0,0,1];
+    // var projmatrix = getprojection(45, canvas.width/canvas.height, 1, 100);
+    // var modmatrix = [
+    //     1,0,0,0,
+    //     0,1,0,0,
+    //     0,0,1,0,
+    //     0,0,0,1];
+    // var viewmatrix = [
+    //     1,0,0,0,
+    //     0,1,0,0,
+    //     0,0,1,0,
+    //     0,0,0,1];
 
-    viewmatrix[14] = viewmatrix[14]-3;
-    viewmatrix[13] = viewmatrix[13];
-    viewmatrix[12] = viewmatrix[12];
+    // viewmatrix[14] = viewmatrix[14]-3;
+    // viewmatrix[13] = viewmatrix[13];
+    // viewmatrix[12] = viewmatrix[12];
+
+    var projmatrix = glMatrix.mat4.create();
+    var modmatrix = glMatrix.mat4.create();
+    var viewmatrix = glMatrix.mat4.create();
+
+    glMatrix.mat4.perspective(projmatrix, //matriks proyeksi
+        glMatrix.glMatrix.toRadian(90), //sudutnya
+        1.0, //aspect ratio
+        0.5, //near
+        10.0 //far
+        );
+
+    glMatrix.mat4.lookAt(viewmatrix,//matriks view
+        [0.0, 0.0, 2.0],//posisi kamera (posisi)
+        [0.0, 0.0, -2.0],//arah kamera menghadap (vektor)
+        [0.0, 1.0, 0.0]//arah atas kamera (vektor)
+        );
+
+    var theta = glMatrix.glMatrix.toRadian(1);//sudutnya adalah 1 derajat   
 
     function render(time){
         if(!freeze){
-            translasi(modmatrix,0.01,0.0,0.0);
-            rotasiX(modmatrix, 0.01);
+            // translasi(modmatrix,0.01,0.0,0.0);
+            // rotasiX(modmatrix, 0.01);
+            glMatrix.mat4.rotate(modmatrix, modmatrix, theta, [1.0,1.0,1.0]);
         }
 
         //kedalaman (z)
