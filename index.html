@@ -16,13 +16,26 @@
     <script type="text/javascript" src="static/js/IOHandler.js"></script>
     <script type="text/javascript" src="static/js/GlMatrixMin.js"></script>
 
+    <script id="vertexShaderCode" type="notjs">
+            attribute vec3 aPosition;
+            attribute vec3 aColor;
+            uniform mat4 uMatrix;
+            uniform mat4 uProj;
+            uniform mat4 uView;
+            uniform mat4 uModel;
+            varying vec3 vColor;
+            void main() {
+                vColor = aColor;
+                gl_Position = uProj*uView*uModel*vec4(aPosition, 1.0);
+            }
+        </script>
     <script id="fragmentShaderCode" type="notjs">
-        precision mediump float;
-        varying vec3 vColor;
-        void main(){
+            precision mediump float;
+            varying vec3 vColor;
+            void main() {
             gl_FragColor = vec4(vColor, 1.0);
-        }
-    </script>
+            }
+        </script>
 
 </body>
 </html>

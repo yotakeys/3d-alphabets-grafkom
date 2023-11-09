@@ -1,4 +1,4 @@
-var triangles = [
+var vertices = [
     // x,y,z
     // K (Kotak Kiri)
     -0.8, 0.8, 0.0, // 0
